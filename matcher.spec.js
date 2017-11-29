@@ -8,24 +8,28 @@ expect.extend({
 });
 
 let browser;
+let page;
 
-it('works', async() => {
+beforeEach(async() => {
     browser = await puppeteer.launch({
         headless: true // false to launch real browser
     });
-    const page = await browser.newPage();
+
+    page = await browser.newPage();
 
     await page.setViewport({
         width: 1100,
         height: 2400
     })
+});
 
-    // await page.goto('https://www.google.com')
-    await page.goto('https://www.google.com/about');
-
+it('works', async() => {
+    console.time("screenshot1");
+    await page.goto('https://www.google.com/about/our-commitments/');
     const screenshot1 = await page.screenshot();
+    console.timeEnd("screenshot1");
 
-    console.time("compare");
+    console.time("compare")
     expect(screenshot1).toMatchImageSnapshot();
 });
 

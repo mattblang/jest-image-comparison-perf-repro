@@ -1,19 +1,23 @@
 const puppeteer = require('puppeteer');
 const pixelmatch = require('pixelmatch');
-const PNG = require('pngjs').PNG;
-const fs = require('fs');
 
-(async() => {
-    let browser = await puppeteer.launch({
+let browser;
+let page;
+
+beforeEach(async() => {
+    browser = await puppeteer.launch({
         headless: true // false to launch real browser
     });
-    const page = await browser.newPage();
+
+    page = await browser.newPage();
 
     await page.setViewport({
         width: 1100,
         height: 2400
     })
+});
 
+it('works', async() => {
     console.time("screenshot1");
     await page.goto('https://www.google.com/about/our-company/');
     const screenshot1 = await page.screenshot();
@@ -24,19 +28,15 @@ const fs = require('fs');
     const screenshot2 = await page.screenshot();
     console.timeEnd("screenshot2");
 
-    const diff = new PNG({
-        width: 1100,
-        height: 2400
-    });
-
     console.time("compare")
-    const numDiffPixels = pixelmatch(screenshot1, screenshot2, diff.data, 1100, 2400, {
+    const numDiffPixels = pixelmatch(screenshot1, screenshot2, null, 1100, 2400, {
         threshold: 0.1
     });
     console.timeEnd("compare");
 
-    diff.pack().pipe(fs.createWriteStream('__pixelmatch__/diff.png'));
+    expect(numDiffPixels).toEqual(0);
+}, 20000);
 
-    console.log(`${numDiffPixels} pixels are different`)
+afterAll(async() => {
     await browser.close();
-})();
+});
