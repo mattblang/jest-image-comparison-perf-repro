@@ -19,12 +19,17 @@ it('works', async() => {
         width: 1100,
         height: 2400
     })
-    await page.goto('https://www.yahoo.com');
+
+    // await page.goto('https://www.google.com')
+    await page.goto('https://www.google.com/about');
 
     const screenshot1 = await page.screenshot();
+
+    console.time("compare");
     expect(screenshot1).toMatchImageSnapshot();
 });
 
 afterAll(async() => {
+    console.timeEnd("compare");
     await browser.close();
 });
