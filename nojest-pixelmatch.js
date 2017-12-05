@@ -35,7 +35,9 @@ const fs = require('fs');
     });
     console.timeEnd("compare");
 
-    diff.pack().pipe(fs.createWriteStream('__pixelmatch__/diff.png'));
+    console.time("write diff");
+    diff.pack().pipe(fs.createWriteStream("__pixelmatch__/diff.png"))
+    console.timeEnd("write diff")
 
     console.log(`${numDiffPixels} pixels are different`)
     await browser.close();
