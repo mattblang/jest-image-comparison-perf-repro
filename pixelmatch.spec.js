@@ -6,7 +6,7 @@ const fs = require('fs');
 let browser;
 let page;
 
-beforeEach(async() => {
+it('works', async() => {
     browser = await puppeteer.launch({
         headless: true // false to launch real browser
     });
@@ -17,9 +17,7 @@ beforeEach(async() => {
         width: 1100,
         height: 2400
     })
-});
 
-it('works', async() => {
     console.time("screenshot1");
     await page.goto('https://www.google.com/about/our-company/');
     const screenshot1 = await page.screenshot();
@@ -42,13 +40,14 @@ it('works', async() => {
     console.timeEnd("compare");
 
     // UNCOMMENT THIS TO SLOW THE TEST WAY DOWN:
-    // console.time("write diff");
-    // diff.pack().pipe(fs.createWriteStream("__pixelmatch__/diff.png"))
-    // console.timeEnd("write diff")
+    console.time("write diff");
+    diff.pack().pipe(fs.createWriteStream("__pixelmatch__/diff.png"))
+    console.timeEnd("write diff")
 
     expect(numDiffPixels).toEqual(0);
+
 }, 20000);
 
 afterAll(async() => {
     await browser.close();
-});
+})

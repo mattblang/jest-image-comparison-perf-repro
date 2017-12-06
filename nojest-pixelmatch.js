@@ -4,10 +4,11 @@ const PNG = require('pngjs').PNG;
 const fs = require('fs');
 
 (async() => {
-    let browser = await puppeteer.launch({
+    browser = await puppeteer.launch({
         headless: true // false to launch real browser
     });
-    const page = await browser.newPage();
+
+    page = await browser.newPage();
 
     await page.setViewport({
         width: 1100,
@@ -35,6 +36,7 @@ const fs = require('fs');
     });
     console.timeEnd("compare");
 
+    // UNCOMMENT THIS TO SLOW THE TEST WAY DOWN:
     console.time("write diff");
     diff.pack().pipe(fs.createWriteStream("__pixelmatch__/diff.png"))
     console.timeEnd("write diff")
