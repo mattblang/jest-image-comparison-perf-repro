@@ -1,0 +1,21 @@
+{
+  "name": "jest-image-comparison-perf-repro",
+  "version": "0.0.1",
+  "description": "Reproducing a performance degradation when doing image comparison in Jest",
+  "main": "",
+  "author": "",
+  "dependencies": {
+    "jest": "21.2.1",
+    "pixelmatch": "4.0.2",
+    "pngjs": "^3.3.1",
+    "pngjs-nozlib": "1.0.0",
+    "rimraf": "^2.6.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "jest"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  }
+}
