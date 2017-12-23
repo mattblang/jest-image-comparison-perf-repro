@@ -5,6 +5,7 @@
   "main": "",
   "author": "",
   "dependencies": {
+    "jasmine": "^2.8.0",
     "jest": "21.2.1",
     "pixelmatch": "4.0.2",
     "pngjs": "^3.3.1",
