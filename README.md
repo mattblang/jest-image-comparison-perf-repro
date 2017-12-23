@@ -1,9 +1,9 @@
 # jest-image-comparison-perf-repro
 
 After drilling down further we realized that a simple Math call is slow by several orders of magnitude:
-- Run `npm install` to install local dependencies
+- Run `npm i` to install local dependencies
 - Run `node testing-math/math.js`
-- Run `jasmine testing-math/math.jasmine.js`
+- Run `jasmine testing-math/math.spec.js`
 - Now run `jest testing-math` to see the slowdown
 
 
