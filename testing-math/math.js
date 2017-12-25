@@ -1,4 +1,4 @@
-(async() => {
+(() => {
     var sum = 0;
 
     console.time('math');
